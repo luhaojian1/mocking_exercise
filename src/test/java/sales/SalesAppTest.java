@@ -40,4 +40,22 @@ public class SalesAppTest {
 		verify(salesReportDao, times(1)).getReportData(msales);
 	}
 
+    @Test
+    public void testGenerateSalesActivityReport_givenSalesIdNotNullAndDateValid_thenMehtodGetReportDataCarryOut() {
+
+        SalesApp salesApp = new SalesApp();
+        String salesId = "Array";
+
+
+        SalesDao salesDao = mock(SalesDao.class);
+        Sales msales = mock(Sales.class);
+        when(salesDao.getSalesBySalesId(salesId)).thenReturn(msales);
+        when(msales.getEffectiveFrom()).thenReturn(new Date());
+        when(msales.getEffectiveTo()).thenReturn(new Date(System.currentTimeMillis() + 1000));
+
+        SalesReportDao salesReportDao = mock(SalesReportDao.class);
+        salesApp.generateSalesActivityReport(salesId, 1000, false, false, salesDao, salesReportDao);
+
+        verify(salesReportDao, times(1)).getReportData(msales);
+    }
 }
