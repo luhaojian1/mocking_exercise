@@ -3,7 +3,7 @@ package sales;
 import java.util.Date;
 
 public class Sales {
-	
+
 	private boolean isSupervisor;
 
 	public Date getEffectiveTo() {

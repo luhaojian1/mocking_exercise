@@ -6,10 +6,9 @@ import java.util.List;
 
 public class SalesApp {
 
-	public void generateSalesActivityReport(String salesId, int maxRow, boolean isNatTrade, boolean isSupervisor) {
 
-        SalesDao salesDao = new SalesDao();
-		SalesReportDao salesReportDao = new SalesReportDao();
+	public void generateSalesActivityReport(String salesId, int maxRow, boolean isNatTrade, boolean isSupervisor, SalesDao salesDao, SalesReportDao salesReportDao) {
+
 		List<String> headers = null;
 
         if (salesId == null) {
@@ -17,7 +16,6 @@ public class SalesApp {
 		}
 
         Sales sales = salesDao.getSalesBySalesId(salesId);
-
         Date today = new Date();
 		if (today.after(sales.getEffectiveTo())
 				|| today.before(sales.getEffectiveFrom())){
